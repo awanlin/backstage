@@ -85,19 +85,34 @@ const MockRouteSource = <T extends { [name in string]: string }>(props: {
 };
 
 const Extension1 = plugin.provide(
-  createRoutableExtension({ component: MockComponent, mountPoint: ref1 }),
+  createRoutableExtension({
+    component: () => Promise.resolve(MockComponent),
+    mountPoint: ref1,
+  }),
 );
 const Extension2 = plugin.provide(
-  createRoutableExtension({ component: MockRouteSource, mountPoint: ref2 }),
+  createRoutableExtension({
+    component: () => Promise.resolve(MockRouteSource),
+    mountPoint: ref2,
+  }),
 );
 const Extension3 = plugin.provide(
-  createRoutableExtension({ component: MockComponent, mountPoint: ref3 }),
+  createRoutableExtension({
+    component: () => Promise.resolve(MockComponent),
+    mountPoint: ref3,
+  }),
 );
 const Extension4 = plugin.provide(
-  createRoutableExtension({ component: MockRouteSource, mountPoint: ref4 }),
+  createRoutableExtension({
+    component: () => Promise.resolve(MockRouteSource),
+    mountPoint: ref4,
+  }),
 );
 const Extension5 = plugin.provide(
-  createRoutableExtension({ component: MockComponent, mountPoint: ref5 }),
+  createRoutableExtension({
+    component: () => Promise.resolve(MockComponent),
+    mountPoint: ref5,
+  }),
 );
 
 function withRoutingProvider(
