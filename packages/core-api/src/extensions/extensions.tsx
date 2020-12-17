@@ -21,7 +21,7 @@ import { Extension, BackstagePlugin } from '../plugin/types';
 
 type ComponentLoader<T> =
   | {
-      lazy: () => Promise<T>;
+      lazy: () => Promise<T | { default: T }>;
     }
   | {
       sync: T;
@@ -30,7 +30,7 @@ type ComponentLoader<T> =
 export function createRoutableExtension<
   T extends (props: any) => JSX.Element
 >(options: {
-  component: () => Promise<T>;
+  component: () => Promise<T | { default: T }>;
   mountPoint: RouteRef;
 }): Extension<T> {
   const { component, mountPoint } = options;
@@ -63,7 +63,7 @@ export function createReactExtension<
   if ('lazy' in options.component) {
     const lazyLoader = options.component.lazy;
     Component = (lazy(() =>
-      lazyLoader().then(component => ({ default: component })),
+      lazyLoader().then(m => (typeof m === 'object' ? m : { default: m })),
     ) as unknown) as T;
   } else {
     Component = options.component.sync;
