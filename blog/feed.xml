@@ -1,25 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0">
     <channel>
-        <title>Backstage Service Catalog and Developer Platform Blog</title>
+        <title>Backstage Software Catalog and Developer Platform Blog</title>
         <link>https://backstage.io/blog</link>
-        <description>The best place to stay up-to-date with the latest Backstage Service Catalog and Developer Platform news and events.</description>
-        <lastBuildDate>Thu, 22 Oct 2020 06:00:00 GMT</lastBuildDate>
+        <description>The best place to stay up-to-date with the latest Backstage Software Catalog and Developer Platform news and events.</description>
+        <lastBuildDate>Mon, 26 Jul 2021 06:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <image>
-            <title>Backstage Service Catalog and Developer Platform Blog</title>
+            <title>Backstage Software Catalog and Developer Platform Blog</title>
             <url>https://backstage.io/undefined</url>
             <link>https://backstage.io/blog</link>
         </image>
-        <copyright>Copyright © 2020 Backstage Project Authors. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our Trademark Usage page: https://www.linuxfoundation.org/trademark-usage</copyright>
+        <copyright>Copyright © 2021 Backstage Project Authors. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our Trademark Usage page: https://www.linuxfoundation.org/trademark-usage</copyright>
+        <item>
+            <title><![CDATA[Software Templates is now in Beta]]></title>
+            <link>https://backstage.io/blog/2021/07/26/software-templates-are-now-in-beta.html</link>
+            <guid>https://backstage.io/blog/2021/07/26/software-templates-are-now-in-beta.html</guid>
+            <pubDate>Mon, 26 Jul 2021 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><img src="/blog/assets/21-07-26/backstage-software-templates-beta.gif" alt="Software Templates in Beta"></p>
+<p><strong>TLDR</strong>; At a high level, Backstage performs three main jobs: <a href="https://backstage.io/blog/2021/05/20/adopting-backstage#three-jobs-create-manage-explore">Create, Manage, and Explore</a>. Throughout the year, we’ve been focussed on improving the stability and scalability of these areas while enhancing the feature sets based upon requests from the community. Software Templates — which enable push-button deployments with all your standards and best practices built-in — is our first feature-complete release candidate to graduate to beta. Read on to learn how this release improves template customization and flexibility, as well as performance.</p>
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Announcing the Backstage Search platform: a customizable search tool built just for you]]></title>
+            <link>https://backstage.io/blog/2021/06/24/announcing-backstage-search-platform.html</link>
+            <guid>https://backstage.io/blog/2021/06/24/announcing-backstage-search-platform.html</guid>
+            <pubDate>Thu, 24 Jun 2021 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><img src="/blog/assets/21-06-24/backstage-search-platform.png" alt="Backstage Search platform"></p>
+<p><strong>TLDR;</strong> The new Backstage Search is now available in alpha, ready for you to start building on. A total rethinking of the core search feature in Backstage, it’s more than just a box you type into — it’s a mini platform all by itself. With its composable frontend and extensible backend, you can design and build the search tool that suits your organization’s needs.</p>
+<p>So, you don’t just get an improved out-of-the-box experience for searching whatever is in your software catalog. You can also add support for searching other sources, too. Customize it the way you want and you can search your catalog, your plugins and docs — and even external sources, like Stack Overflow and Confluence — all at once, all right inside Backstage.</p>
+<p>With one query, your teams can find exactly what they’re looking for: anything and everything.</p>
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[How Spotify is helping more companies adopt Backstage]]></title>
+            <link>https://backstage.io/blog/2021/06/22/spotify-backstage-is-growing.html</link>
+            <guid>https://backstage.io/blog/2021/06/22/spotify-backstage-is-growing.html</guid>
+            <pubDate>Tue, 22 Jun 2021 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><a href="https://backstage.spotify.com/"><img src="/blog/assets/21-06-22/spotify-backstage-header.gif" alt="The Backstage community is growing! In just over a year, Backstage has gone from a few open source building blocks to a thriving platform used by engineering orgs with thousands of developers. But even with 30+ adopting companies and 400+ contributors, we are still in the very early stages of reaching the platform’s potential."></a>
+<em><a href="https://backstage.spotify.com">backstage.spotify.com</a></em></p>
+<p>The Backstage community is growing! In just over <a href="https://engineering.atspotify.com/2021/03/16/happy-birthday-backstage-spotifys-biggest-open-source-project-grows-up-fast/">a year</a>, Backstage has gone from a few open source building blocks to a thriving platform used by engineering orgs with thousands of developers. But even with 30+ <a href="https://github.com/backstage/backstage/blob/master/ADOPTERS.md">adopting companies</a> and 400+ contributors, we are still in the very early stages of reaching the platform’s potential.</p>
+<p>In order to grow Backstage further, Spotify is increasing the support we provide both adopters (the people integrating Backstage into their organizations) and contributors (the people building features and improving the code). The more companies that adopt Backstage, the more support the project gets, the stronger the platform becomes for everyone.</p>
+<p>And while Spotify remains committed to maturing the Backstage platform — both as original creator and active maintainer — we also want to make room for the community to take greater ownership. Backstage may have started inside Spotify, but it belongs to all of you. So, we hope you join us in what’s next.</p>
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Where do you start when adopting Backstage?]]></title>
+            <link>https://backstage.io/blog/2021/05/20/adopting-backstage.html</link>
+            <guid>https://backstage.io/blog/2021/05/20/adopting-backstage.html</guid>
+            <pubDate>Thu, 20 May 2021 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><img src="/blog/assets/21-05-20/create-manage-explore.gif" alt="Create, Manage, Explore"></p>
+<p>One of the greatest strengths of Backstage also presents a never-ending challenge: Backstage is highly customizable and allows you to easily build a unique developer portal suited to your organization’s needs. The downside of this flexibility is that it can be hard to know where to start. Backstage can do so many things — integrating every part of your tech infrastructure and developer experience — but if you set off building a developer portal without a plan, it’s easy to get overwhelmed by all the possibilities. To help you form your plan, this post will detail how Spotify came to design our internal portal and recommend potential models for you to use when designing and building your own.</p>
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[New Backstage feature: Kubernetes for Service owners]]></title>
+            <link>https://backstage.io/blog/2021/01/12/new-backstage-feature-kubernetes-for-service-owners.html</link>
+            <guid>https://backstage.io/blog/2021/01/12/new-backstage-feature-kubernetes-for-service-owners.html</guid>
+            <pubDate>Tue, 12 Jan 2021 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><img src="/blog/assets/21-01-12/backstage-k8s-1-hero.gif" alt="Animation of Kubernetes and cloud provider icons becoming the Backstage logo"></p>
+<p>TLDR; We’re rethinking the Kubernetes developer experience with a new feature: a Kubernetes monitoring tool that’s designed around the needs of service owners, not cluster admins. Now developers can easily check the health of their services no matter how or where those services are deployed — whether it’s on a local host for testing or in production on dozens of clusters around the world.</p>
+<p>And since Backstage uses the native Kubernetes API, the feature works with whichever cloud provider (AWS, Azure, GCP, etc.) or managed service (OpenShift, IBM Cloud, GKE, etc.) you already use.</p>
+]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Announcing the Backstage Stability Index]]></title>
+            <link>https://backstage.io/blog/2020/12/22/stability-index.html</link>
+            <guid>https://backstage.io/blog/2020/12/22/stability-index.html</guid>
+            <pubDate>Tue, 22 Dec 2020 06:00:00 GMT</pubDate>
+            <description><![CDATA[<p><strong>TL;DR</strong> Backstage is heading out of alpha and moving onto the path to stable releases and an eventual version 1.0. As the community and ecosystem continue to grow at an increasing rate, we want to provide a solid foundation for everyone building things in, with, and around Backstage. So, today we’re introducing the <a href="https://backstage.io/docs/overview/stability-index">Stability Index</a> — a simple way to find out how likely (or unlikely) a specific package or plugin inside Backstage might be updated with major changes. By indicating the reliability of key features and APIs, this quick reference will help contributors and adopters better plan and coordinate their development efforts going forward.</p>
+<p><img src="/blog/assets/2020-12-22/stability-index-hero.gif" alt="Animation cycling between stability index scores"></p>
+]]></description>
+        </item>
         <item>
             <title><![CDATA[New Cost Insights plugin: The engineer’s solution to taming cloud costs]]></title>
             <link>https://backstage.io/blog/2020/10/22/cost-insights-plugin.html</link>
             <guid>https://backstage.io/blog/2020/10/22/cost-insights-plugin.html</guid>
             <pubDate>Thu, 22 Oct 2020 06:00:00 GMT</pubDate>
             <description><![CDATA[<p>How did Spotify save millions on cloud costs within a matter of months?? We made cost optimization just another part of the daily development process. Our newly open sourced <a href="https://github.com/backstage/backstage/tree/master/plugins/cost-insights">Cost Insights plugin</a> makes a team’s cloud costs visible — and actionable — right inside Backstage. So engineers can see the impact of their cloud usage (down to a product and resource level) and make optimizations wherever and whenever it makes sense. By managing cloud costs from the ground up, you can make smarter decisions that let you continue to build and scale quickly, without wasting resources.</p>
-<iframe width="780" height="440" src="https://www.youtube.com/embed/YLAd5hdXR_Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="780" height="440" src="https://www.youtube.com/embed/YLAd5hdXR_Q" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
 <p>Are we turning engineers into accountants? Nope, we’re just letting engineers do what they do best, in the place that feels natural to them: inside Backstage.</p>
 ]]></description>
         </item>
@@ -58,7 +118,7 @@
             <guid>https://backstage.io/blog/2020/09/08/announcing-tech-docs.html</guid>
             <pubDate>Tue, 08 Sep 2020 06:00:00 GMT</pubDate>
             <description><![CDATA[<p>Since we <a href="https://backstage.io/blog/2020/03/16/announcing-backstage">open sourced Backstage</a>, one of the most requested features has been for a technical documentation plugin. Well, good news. The first open source version of TechDocs is here. Now let’s start collaborating and making it better, together.</p>
-<iframe width="780" height="440" src="https://www.youtube.com/embed/mOLCgdPw1iA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+<iframe width="780" height="440" src="https://www.youtube.com/embed/mOLCgdPw1iA" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
 </iframe>
 ]]></description>
         </item>

@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[20],{3027:function(module,exports){module.exports=function(hljs){return{contains:[{className:"attribute",begin:/</,end:/>/},{begin:/::=/,starts:{end:/$/,contains:[{begin:/</,end:/>/},hljs.C_LINE_COMMENT_MODE,hljs.C_BLOCK_COMMENT_MODE,hljs.APOS_STRING_MODE,hljs.QUOTE_STRING_MODE]}}]}}}}]);
-//# sourceMappingURL=react-syntax-highlighter_languages_highlight_bnf.45f7d2e5109d333fed6a.bundle.js.map
