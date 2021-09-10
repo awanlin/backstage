@@ -146,6 +146,10 @@ build:</p>
 <p>You should then start to get logs in your terminal, and then you can open your
 browser at <code>http://localhost:7000</code></p>
 <h2><a class="anchor" aria-hidden="true" id="multi-stage-build"></a><a href="#multi-stage-build" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Multi-stage Build</h2>
+<blockquote>
+<p>NOTE: The <code>.dockerignore</code> is different in this setup, read on for more
+details.</p>
+</blockquote>
 <p>This section describes how to set up a multi-stage Docker build that builds the
 entire project within Docker. This is typically slower than a host build, but is
 sometimes desired because Docker in Docker is not available in the build
@@ -166,6 +170,7 @@ the repo root:</p>
 <span class="hljs-keyword">COPY</span><span class="bash"> package.json yarn.lock ./</span>
 
 <span class="hljs-keyword">COPY</span><span class="bash"> packages packages</span>
+<span class="hljs-comment"># Comment this out if you don't have any internal plugins</span>
 <span class="hljs-keyword">COPY</span><span class="bash"> plugins plugins</span>
 
 <span class="hljs-keyword">RUN</span><span class="bash"> find packages \! -name <span class="hljs-string">"package.json"</span> -mindepth 2 -maxdepth 2 -<span class="hljs-built_in">exec</span> rm -rf {} \+</span>
@@ -209,8 +214,9 @@ in the main repo, since the <code>backstage-cli</code> which is used for the bui
 end up being properly installed.</p>
 <p>To speed up the build when not running in a fresh clone of the repo you should
 set up a <code>.dockerignore</code>. This one is different than the host build one, because
-we want to have access to the source code of all packages for the build, but can
-ignore any existing build output or dependencies:</p>
+we want to have access to the source code of all packages for the build. We can
+however ignore any existing build output or dependencies on the host. For our
+new <code>.dockerignore</code>, replace the contents of your existing one with this:</p>
 <pre><code class="hljs css language-text">node_modules
 packages/*/dist
 packages/*/node_modules
