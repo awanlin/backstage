@@ -28,6 +28,7 @@
 <tr><td><a href="/docs/reference/plugin-catalog-backend.databasemanager">DatabaseManager</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-backend.defaultcatalogcollator">DefaultCatalogCollator</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-backend.defaultcatalogprocessingorchestrator">DefaultCatalogProcessingOrchestrator</a></td><td></td></tr>
+<tr><td><a href="/docs/reference/plugin-catalog-backend.defaultcatalogrulesenforcer">DefaultCatalogRulesEnforcer</a></td><td>Implements the default catalog rule set, consuming the config keys <code>catalog.rules</code> and <code>catalog.locations.[].rules</code>.</td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-backend.filereaderprocessor">FileReaderProcessor</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-backend.githubdiscoveryprocessor">GithubDiscoveryProcessor</a></td><td>Extracts repositories out of a GitHub org.<!-- -->The following will create locations for all projects which have a catalog-info.yaml on the default branch. The first is shorthand for the second.<!-- -->target: &quot;<a href="https://github.com/backstage">https://github.com/backstage</a>&quot; or target: <a href="https://github.com/backstage/*">https://github.com/backstage/*</a><!-- -->/<!-- -->blob/-/catalog-info.yaml<!-- -->You may also explicitly specify the source branch:<!-- -->target: <a href="https://github.com/backstage/*">https://github.com/backstage/*</a><!-- -->/<!-- -->blob/main/catalog-info.yaml</td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-backend.githuborgreaderprocessor">GithubOrgReaderProcessor</a></td><td>Extracts teams and users out of a GitHub org.</td></tr>
@@ -73,6 +74,7 @@
 <tr><td><a href="/docs/reference/plugin-catalog-backend.catalogentitydocument">CatalogEntityDocument</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-backend.catalogprocessingengine">CatalogProcessingEngine</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-backend.catalogprocessingorchestrator">CatalogProcessingOrchestrator</a></td><td></td></tr>
+<tr><td><a href="/docs/reference/plugin-catalog-backend.catalogprocessorcache">CatalogProcessorCache</a></td><td>A cache for storing data during processing.<!-- -->The values stored in the cache are always local to each processor, meaning no processor can see cache values from other processors.<!-- -->The cache instance provided to the CatalogProcessor is also scoped to the entity being processed, meaning that each processor run can't see cache values from processing runs for other entities.<!-- -->Values that are set during a processing run will only be visible in the directly following run. The cache will be overwritten every run unless no new cache items are written, in which case the existing values remain in the cache.</td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-backend.entityprovider">EntityProvider</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-backend.entityproviderconnection">EntityProviderConnection</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-backend.locationservice">LocationService</a></td><td></td></tr>
@@ -114,6 +116,8 @@
 <tr><td><a href="/docs/reference/plugin-catalog-backend.catalogprocessorparser">CatalogProcessorParser</a></td><td>A parser, that is able to take the raw catalog descriptor data and turn it into the actual result pieces. The default implementation performs a YAML document parsing.</td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-backend.catalogprocessorrelationresult">CatalogProcessorRelationResult</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-backend.catalogprocessorresult">CatalogProcessorResult</a></td><td></td></tr>
+<tr><td><a href="/docs/reference/plugin-catalog-backend.catalogrule">CatalogRule</a></td><td>Rules to apply to catalog entities.<!-- -->An undefined list of matchers means match all, an empty list of matchers means match none.</td></tr>
+<tr><td><a href="/docs/reference/plugin-catalog-backend.catalogrulesenforcer">CatalogRulesEnforcer</a></td><td>Decides whether an entity from a given location is allowed to enter the catalog, according to some rule set.</td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-backend.createdatabaseoptions">CreateDatabaseOptions</a></td><td></td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-backend.database">Database</a></td><td>An abstraction on top of the underlying database, wrapping the basic CRUD needs.</td></tr>
 <tr><td><a href="/docs/reference/plugin-catalog-backend.databaselocationupdatelogevent">DatabaseLocationUpdateLogEvent</a></td><td></td></tr>
