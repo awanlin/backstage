@@ -64,7 +64,7 @@
             });
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/backstage/backstage/edit/master/docs/features/software-templates/writing-custom-actions.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Writing Custom Actions</h1></header><article><div><span><p>If you're wanting to extend the functionality of the Scaffolder, you can do so
 by writing custom actions which can be used along side our
-<a href="/docs/features/software-templates/builtin-actions">built-in actions</a></p>
+<a href="/docs/features/software-templates/builtin-actions">built-in actions</a>.</p>
 <h3><a class="anchor" aria-hidden="true" id="writing-your-custom-action"></a><a href="#writing-your-custom-action" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Writing your Custom Action</h3>
 <p>Your custom action can live where you choose, but simplest is to include it
 alongside your <code>backend</code> package in <code>packages/backend</code>.</p>
@@ -110,26 +110,26 @@ new action.</p>
 close over the <code>TemplateAction</code>. Take a look at our
 <a href="https://github.com/backstage/backstage/blob/master/plugins/scaffolder-backend/src/scaffolder/actions/builtin">built-in actions</a>
 for reference.</p>
-<p>We set the type generic to <code>{ contents: string, filename: string}</code> which is
+<p>We set the type generic to <code>{ contents: string, filename: string }</code> which is
 there to set the type on the handler <code>ctx</code> <code>inputs</code> property so we get good type
 checking. This could be generated from the next part of this guide, the <code>input</code>
 schema, but it's not supported right now. Feel free to contribute 🚀 👍.</p>
 <p>The <code>createTemplateAction</code> takes an object which specifies the following:</p>
 <ul>
 <li><code>id</code> - a unique ID for your custom action. We encourage you to namespace these
-in someway so they wont collide with future built-in actions that we may ship
-with the <code>scaffolder-backend</code> plugin.</li>
+in some way so that they won't collide with future built-in actions that we
+may ship with the <code>scaffolder-backend</code> plugin.</li>
 <li><code>schema.input</code> - A JSON schema for input values to your function</li>
 <li><code>schema.output</code> - A JSON schema for values which are outputted from the
 function using <code>ctx.output</code></li>
-<li><code>handler</code> the actual code which is run part of the action, with a context.</li>
+<li><code>handler</code> - the actual code which is run part of the action, with a context</li>
 </ul>
 <h4><a class="anchor" aria-hidden="true" id="the-context-object"></a><a href="#the-context-object" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The context object</h4>
 <p>When the action <code>handler</code> is called, we provide you a <code>context</code> as the only
 argument. It looks like the following:</p>
 <ul>
 <li><code>ctx.baseUrl</code> - a string where the template is located</li>
-<li><code>ctx.logger</code> - a winston logger for additional logging inside your action</li>
+<li><code>ctx.logger</code> - a Winston logger for additional logging inside your action</li>
 <li><code>ctx.logStream</code> - a stream version of the logger if needed</li>
 <li><code>ctx.workspacePath</code> - a string of the working directory of the template run</li>
 <li><code>ctx.input</code> - an object which should match the JSON schema provided in the
