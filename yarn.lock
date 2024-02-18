@@ -27560,6 +27560,8 @@ __metadata:
     "@backstage/cli": "workspace:^"
     "@backstage/plugin-adr-backend": "workspace:^"
     "@backstage/plugin-app-backend": "workspace:^"
+    "@backstage/plugin-auth-backend": "workspace:^"
+    "@backstage/plugin-auth-backend-module-github-provider": "workspace:^"
     "@backstage/plugin-auth-node": "workspace:^"
     "@backstage/plugin-azure-devops-backend": "workspace:^"
     "@backstage/plugin-badges-backend": "workspace:^"
