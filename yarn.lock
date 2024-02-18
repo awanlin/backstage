@@ -22184,7 +22184,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"better-sqlite3@npm:^9.0.0":
+"better-sqlite3@npm:^9.0.0, better-sqlite3@npm:^9.4.1":
   version: 9.4.1
   resolution: "better-sqlite3@npm:9.4.1"
   dependencies:
@@ -27439,6 +27439,12 @@ __metadata:
   languageName: node
   linkType: soft
 
+"example-app@link:../app::locator=example-backend-next%40workspace%3Apackages%2Fbackend-next":
+  version: 0.0.0-use.local
+  resolution: "example-app@link:../app::locator=example-backend-next%40workspace%3Apackages%2Fbackend-next"
+  languageName: node
+  linkType: soft
+
 "example-app@workspace:packages/app":
   version: 0.0.0-use.local
   resolution: "example-app@workspace:packages/app"
@@ -27594,6 +27600,8 @@ __metadata:
     "@backstage/plugin-sonarqube-backend": "workspace:^"
     "@backstage/plugin-techdocs-backend": "workspace:^"
     "@backstage/plugin-todo-backend": "workspace:^"
+    better-sqlite3: ^9.4.1
+    example-app: "link:../app"
   languageName: unknown
   linkType: soft
 

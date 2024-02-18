@@ -63,7 +63,9 @@
     "@backstage/plugin-signals-backend": "workspace:^",
     "@backstage/plugin-sonarqube-backend": "workspace:^",
     "@backstage/plugin-techdocs-backend": "workspace:^",
-    "@backstage/plugin-todo-backend": "workspace:^"
+    "@backstage/plugin-todo-backend": "workspace:^",
+    "better-sqlite3": "^9.4.1",
+    "example-app": "link:../app"
   },
   "devDependencies": {
     "@backstage/cli": "workspace:^"
