@@ -35,13 +35,16 @@ leaving any imports in place.
 import { version as backendCommon } from '../../../../packages/backend-common/package.json';
 import { version as backendPluginApi } from '../../../../packages/backend-plugin-api/package.json';
 import { version as backendTestUtils } from '../../../../packages/backend-test-utils/package.json';
+import { version as catalogModel } from '../../../../packages/catalog-model/package.json';
 import { version as cli } from '../../../../packages/cli/package.json';
 import { version as config } from '../../../../packages/config/package.json';
 import { version as coreAppApi } from '../../../../packages/core-app-api/package.json';
 import { version as coreComponents } from '../../../../packages/core-components/package.json';
 import { version as corePluginApi } from '../../../../packages/core-plugin-api/package.json';
 import { version as devUtils } from '../../../../packages/dev-utils/package.json';
+import { version as errors } from '../../../../packages/errors/package.json';
 import { version as testUtils } from '../../../../packages/test-utils/package.json';
+import { version as catalogNode } from '../../../../plugins/catalog-node/package.json';
 import { version as scaffolderNode } from '../../../../plugins/scaffolder-node/package.json';
 import { version as authBackend } from '../../../../plugins/auth-backend/package.json';
 import { version as authBackendModuleGuestProvider } from '../../../../plugins/auth-backend-module-guest-provider/package.json';
@@ -53,14 +56,17 @@ export const packageVersions: Record<string, string> = {
   '@backstage/backend-defaults': backendDefaults,
   '@backstage/backend-plugin-api': backendPluginApi,
   '@backstage/backend-test-utils': backendTestUtils,
+  '@backstage/catalog-model': catalogModel,
   '@backstage/cli': cli,
   '@backstage/config': config,
   '@backstage/core-app-api': coreAppApi,
   '@backstage/core-components': coreComponents,
   '@backstage/core-plugin-api': corePluginApi,
   '@backstage/dev-utils': devUtils,
+  '@backstage/errors': errors,
   '@backstage/test-utils': testUtils,
   '@backstage/theme': theme,
+  '@backstage/plugin-catalog-node': catalogNode,
   '@backstage/plugin-scaffolder-node': scaffolderNode,
   '@backstage/plugin-auth-backend': authBackend,
   '@backstage/plugin-auth-backend-module-guest-provider':
