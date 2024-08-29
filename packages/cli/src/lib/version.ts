@@ -42,6 +42,8 @@ import { version as coreComponents } from '../../../../packages/core-components/
 import { version as corePluginApi } from '../../../../packages/core-plugin-api/package.json';
 import { version as devUtils } from '../../../../packages/dev-utils/package.json';
 import { version as testUtils } from '../../../../packages/test-utils/package.json';
+import { version as permissionCommon } from '../../../../plugins/permission-common/package.json';
+import { version as permissionNode } from '../../../../plugins/permission-node/package.json';
 import { version as scaffolderNode } from '../../../../plugins/scaffolder-node/package.json';
 import { version as authBackend } from '../../../../plugins/auth-backend/package.json';
 import { version as authBackendModuleGuestProvider } from '../../../../plugins/auth-backend-module-guest-provider/package.json';
@@ -61,6 +63,8 @@ export const packageVersions: Record<string, string> = {
   '@backstage/dev-utils': devUtils,
   '@backstage/test-utils': testUtils,
   '@backstage/theme': theme,
+  '@backstage/plugin-permission-common': permissionCommon,
+  '@backstage/plugin-permission-node': permissionNode,
   '@backstage/plugin-scaffolder-node': scaffolderNode,
   '@backstage/plugin-auth-backend': authBackend,
   '@backstage/plugin-auth-backend-module-guest-provider':

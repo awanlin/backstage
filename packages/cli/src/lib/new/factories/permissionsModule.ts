@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
+import fs from 'fs-extra';
 import chalk from 'chalk';
 import { paths } from '../../paths';
 import { addCodeownersEntry, getCodeownersFilePath } from '../../codeowners';
 import { CreateContext, createFactory } from '../types';
-import { Task } from '../../tasks';
+import { addPackageDependency, addToBackend, Task } from '../../tasks';
 import { ownerPrompt } from './common/prompts';
 import { executePluginPackageTemplate } from './common/tasks';
 import { resolvePackageName } from './common/util';
@@ -29,10 +30,10 @@ type Options = {
   codeOwnersPath?: string;
 };
 
-export const scaffolderModule = createFactory<Options>({
-  name: 'scaffolder-module',
+export const permissionModule = createFactory<Options>({
+  name: 'permission-module',
   description:
-    'An module exporting custom actions for @backstage/plugin-scaffolder-backend',
+    'An module exporting a custom permission policy for @backstage/plugin-permission-backend',
   optionsDiscovery: async () => ({
     codeOwnersPath: await getCodeownersFilePath(paths.targetRoot),
   }),
@@ -54,7 +55,7 @@ export const scaffolderModule = createFactory<Options>({
   ],
   async create(options: Options, ctx: CreateContext) {
     const { id } = options;
-    const slug = `scaffolder-backend-module-${id}`;
+    const slug = `permission-backend-module-${id}`;
 
     const name = resolvePackageName({
       baseName: slug,
@@ -71,7 +72,7 @@ export const scaffolderModule = createFactory<Options>({
 
     await executePluginPackageTemplate(ctx, {
       targetDir,
-      templateName: 'scaffolder-module',
+      templateName: 'permission-module',
       values: {
         id,
         name,
@@ -81,6 +82,23 @@ export const scaffolderModule = createFactory<Options>({
         license: ctx.license,
       },
     });
+
+    if (await fs.pathExists(paths.resolveTargetRoot('packages/backend'))) {
+      await Task.forItem('backend', 'adding dependency', async () => {
+        await addPackageDependency(
+          paths.resolveTargetRoot('packages/backend/package.json'),
+          {
+            dependencies: {
+              [name]: `^${ctx.defaultVersion}`,
+            },
+          },
+        );
+      });
+
+      await addToBackend(name, {
+        type: 'plugin',
+      });
+    }
 
     if (options.owner) {
       await addCodeownersEntry(`/plugins/${slug}`, options.owner);

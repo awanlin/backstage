@@ -26,3 +26,5 @@ To try out the command locally, you can execute the following from the parent di
 
 - [Backstage Readme](https://github.com/backstage/backstage/blob/master/README.md)
 - [Backstage Documentation](https://backstage.io/docs)
+
+~/repos/forks/backstage/packages/cli/bin/backstage-cli new
