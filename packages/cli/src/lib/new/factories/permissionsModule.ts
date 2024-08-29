@@ -33,7 +33,7 @@ type Options = {
 export const permissionModule = createFactory<Options>({
   name: 'permission-module',
   description:
-    'An module exporting a custom permission policy for @backstage/plugin-permission-backend',
+    'A module exporting a custom permission policy for @backstage/plugin-permission-backend',
   optionsDiscovery: async () => ({
     codeOwnersPath: await getCodeownersFilePath(paths.targetRoot),
   }),
