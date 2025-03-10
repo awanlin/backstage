@@ -1,5 +1,5 @@
 ---
-'@backstage/plugin-techdocs-backend': patch
+'@backstage/plugin-techdocs-backend': minor
 ---
 
-Removed deprecated code
+**BREAKING** Removed deprecated code `DefaultTechDocsCollatorFactory`. Use the `@backstage/plugin-search-backend-module-techdocs` for this instead.
