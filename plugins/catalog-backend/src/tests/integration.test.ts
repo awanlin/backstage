@@ -54,7 +54,6 @@ import { RefreshOptions, RefreshService } from '../service/types';
 import { DefaultStitcher } from '../stitching/DefaultStitcher';
 import { mockServices } from '@backstage/backend-test-utils';
 import { LoggerService } from '@backstage/backend-plugin-api';
-import { DatabaseManager } from '@backstage/backend-common';
 import { entitiesResponseToObjects } from '../service/response';
 import { deleteOrphanedEntities } from '../database/operations/util/deleteOrphanedEntities';
 
@@ -231,11 +230,7 @@ class TestHarness {
       },
     });
     const logger = options?.logger ?? mockServices.logger.mock();
-    const db =
-      options?.db ??
-      (await DatabaseManager.fromConfig(config, { logger })
-        .forPlugin('catalog')
-        .getClient());
+    const db = options?.db ?? (await mockServices.database.mock().getClient());
 
     await applyDatabaseMigrations(db);
 

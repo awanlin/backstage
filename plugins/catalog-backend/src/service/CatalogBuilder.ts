@@ -15,10 +15,6 @@
  */
 
 import {
-  createLegacyAuthAdapters,
-  HostDiscovery,
-} from '@backstage/backend-common';
-import {
   DefaultNamespaceEntityPolicy,
   Entity,
   EntityPolicies,
@@ -128,8 +124,7 @@ export type CatalogPermissionRuleInput<
 > = PermissionRule<Entity, EntitiesSearchFilter, 'catalog-entity', TParams>;
 
 /**
- * @deprecated Please migrate to the new backend system as this will be removed in the future.
- * @public
+ * @internal
  */
 export type CatalogEnvironment = {
   logger: LoggerService;
@@ -140,8 +135,8 @@ export type CatalogEnvironment = {
   permissionsRegistry?: PermissionsRegistryService;
   scheduler?: SchedulerService;
   discovery?: DiscoveryService;
-  auth?: AuthService;
-  httpAuth?: HttpAuthService;
+  auth: AuthService;
+  httpAuth: HttpAuthService;
   auditor?: AuditorService;
 };
 
@@ -482,14 +477,10 @@ export class CatalogBuilder {
       permissions,
       scheduler,
       permissionsRegistry,
-      discovery = HostDiscovery.fromConfig(config),
       auditor,
+      auth,
+      httpAuth,
     } = this.env;
-
-    const { auth, httpAuth } = createLegacyAuthAdapters({
-      ...this.env,
-      discovery,
-    });
 
     const disableRelationsCompatibility = config.getOptionalBoolean(
       'catalog.disableRelationsCompatibility',
@@ -705,8 +696,6 @@ export class CatalogBuilder {
     const { config, reader } = this.env;
     const integrations = ScmIntegrations.fromConfig(config);
 
-    this.checkDeprecatedReaderProcessors();
-
     const placeholderResolvers: Record<string, PlaceholderResolver> = {
       json: jsonPlaceholderResolver,
       yaml: yamlPlaceholderResolver,
@@ -744,119 +733,7 @@ export class CatalogBuilder {
     // Add the ones (if any) that the user added
     processors.push(...this.processors);
 
-    this.checkMissingExternalProcessors(processors);
-
     return processors;
-  }
-
-  // TODO(Rugvip): These old processors are removed, for a while we'll be throwing
-  //               errors here to make sure people know where to move the config
-  private checkDeprecatedReaderProcessors() {
-    const pc = this.env.config.getOptionalConfig('catalog.processors');
-    if (pc?.has('github')) {
-      throw new Error(
-        `Using deprecated configuration for catalog.processors.github, move to using integrations.github instead`,
-      );
-    }
-    if (pc?.has('gitlabApi')) {
-      throw new Error(
-        `Using deprecated configuration for catalog.processors.gitlabApi, move to using integrations.gitlab instead`,
-      );
-    }
-    if (pc?.has('bitbucketApi')) {
-      throw new Error(
-        `Using deprecated configuration for catalog.processors.bitbucketApi, move to using integrations.bitbucket instead`,
-      );
-    }
-    if (pc?.has('azureApi')) {
-      throw new Error(
-        `Using deprecated configuration for catalog.processors.azureApi, move to using integrations.azure instead`,
-      );
-    }
-  }
-
-  // TODO(freben): This can be removed no sooner than June 2022, after adopters have had some time to adapt to the new package structure
-  private checkMissingExternalProcessors(processors: CatalogProcessor[]) {
-    const skipCheckVarName = 'BACKSTAGE_CATALOG_SKIP_MISSING_PROCESSORS_CHECK';
-    if (process.env[skipCheckVarName]) {
-      return;
-    }
-
-    const locationTypes = new Set(
-      this.env.config
-        .getOptionalConfigArray('catalog.locations')
-        ?.map(l => l.getString('type')) ?? [],
-    );
-    const processorNames = new Set(processors.map(p => p.getProcessorName()));
-
-    function check(
-      locationType: string,
-      processorName: string,
-      installationUrl: string,
-    ) {
-      if (
-        locationTypes.has(locationType) &&
-        !processorNames.has(processorName)
-      ) {
-        throw new Error(
-          [
-            `Your config contains a "catalog.locations" entry of type ${locationType},`,
-            `but does not have the corresponding catalog processor ${processorName} installed.`,
-            `This processor used to be built into the catalog itself, but is now moved to an`,
-            `external module that has to be installed manually. Please follow the installation`,
-            `instructions at ${installationUrl} if you are using this ability, or remove the`,
-            `location from your app config if you do not. You can also silence this check entirely`,
-            `by setting the environment variable ${skipCheckVarName} to 'true'.`,
-          ].join(' '),
-        );
-      }
-    }
-
-    check(
-      'aws-cloud-accounts',
-      'AwsOrganizationCloudAccountProcessor',
-      'https://backstage.io/docs/integrations',
-    );
-    check(
-      's3-discovery',
-      'AwsS3DiscoveryProcessor',
-      'https://backstage.io/docs/integrations/aws-s3/discovery',
-    );
-    check(
-      'azure-discovery',
-      'AzureDevOpsDiscoveryProcessor',
-      'https://backstage.io/docs/integrations/azure/discovery',
-    );
-    check(
-      'bitbucket-discovery',
-      'BitbucketDiscoveryProcessor',
-      'https://backstage.io/docs/integrations/bitbucket/discovery',
-    );
-    check(
-      'github-discovery',
-      'GithubDiscoveryProcessor',
-      'https://backstage.io/docs/integrations/github/discovery',
-    );
-    check(
-      'github-org',
-      'GithubOrgReaderProcessor',
-      'https://backstage.io/docs/integrations/github/org',
-    );
-    check(
-      'gitlab-discovery',
-      'GitLabDiscoveryProcessor',
-      'https://backstage.io/docs/integrations/gitlab/discovery',
-    );
-    check(
-      'ldap-org',
-      'LdapOrgReaderProcessor',
-      'https://backstage.io/docs/integrations/ldap/org',
-    );
-    check(
-      'microsoft-graph-org',
-      'MicrosoftGraphOrgReaderProcessor',
-      'https://backstage.io/docs/integrations/azure/org',
-    );
   }
 
   private static getDefaultProcessingInterval(
