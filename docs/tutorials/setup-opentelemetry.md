@@ -57,12 +57,19 @@ check the [documentation](https://www.npmjs.com/package/@opentelemetry/auto-inst
 The default histogram buckets for OpenTelemetry are in milliseconds, but the histograms that are created for Catalog processing emit metrics in second. You might want to adjust this to what fits your need. To do this you can use the [Views feature](https://opentelemetry.io/docs/concepts/signals/metrics/#views) like this:
 
 ```js
+import {
+  ExplicitBucketHistogramAggregation,
+  InstrumentType,
+  View,
+} from '@opentelemetry/sdk-metrics';
+
 const prometheus = new PrometheusExporter();
 const sdk = new NodeSDK({
   metricReader: prometheus,
   views: [
     new View({
-      instrumentName: 'catalog.test',
+      instrumentType: InstrumentType.HISTOGRAM,
+      instrumentUnit: 'seconds',
       aggregation: new ExplicitBucketHistogramAggregation([
         0.01, 0.1, 0.5, 1, 5, 10, 25, 50, 100, 500, 1000,
       ]),
