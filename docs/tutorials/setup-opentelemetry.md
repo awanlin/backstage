@@ -6,7 +6,7 @@ description: Tutorial to setup OpenTelemetry metrics and traces exporters in Bac
 
 Backstage uses [OpenTelemetry](https://opentelemetry.io/) to instrument its components by reporting traces and metrics.
 
-This tutorial shows how to setup exporters in your Backstage backend package. For demonstration purposes we will use a Prometheus exporter, but you can adjust your solution to use another one that suits your needs; see for example the article on [OTLP exporters](https://opentelemetry.io/docs/instrumentation/js/exporters/). This tutorial also includes exporting traces using the JSON/HTTP exporter with Jaeger being the ideal target, but this too can be adjusted to fit your needs by seeing the supported tooling in the [OTLP exporters](https://opentelemetry.io/docs/instrumentation/js/exporters/) documentation.
+This tutorial shows how to setup exporters in your Backstage backend package. For demonstration purposes, we will use a Prometheus exporter, but you can adjust your solution to use another one that suits your needs; see for example the article on [OTLP exporters](https://opentelemetry.io/docs/instrumentation/js/exporters/). We will also show you how to export traces using the JSON/HTTP exporter to Jaegar, but this too can be adjusted to fit your needs by seeing the supported tooling in the [OTLP exporters](https://opentelemetry.io/docs/instrumentation/js/exporters/) documentation.
 
 ## Install dependencies
 
