@@ -123,7 +123,7 @@ First we need to the `@opentelemetry/api` package:
 yarn --cwd packages/backend add @opentelemetry/api
 ```
 
-Then we want to add the following snippet before the `sdk.start()` call:
+Then, we want to add the following snippet before the `sdk.start()` call:
 
 ```js
 const { diag, DiagConsoleLogger, DiagLogLevel } = require('@opentelemetry/api');
