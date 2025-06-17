@@ -115,7 +115,7 @@ You can now start your Backstage instance as usual, using `yarn start` and you'l
 
 ### Troubleshooting
 
-If you are having issues getting metrics or traces working there are some helpful diagnostic tools from OpenTelemetry you can use that can help.
+If you are having issues getting metrics or traces working, there are some helpful diagnostic tools from OpenTelemetry that you can use that can help.
 
 First we need to the `@opentelemetry/api` package:
 
