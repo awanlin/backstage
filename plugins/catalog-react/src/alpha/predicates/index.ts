@@ -21,3 +21,4 @@ export type {
   EntityPredicateValue,
 } from './types';
 export { entityPredicateToFilterFunction } from './entityPredicateToFilterFunction';
+export { createEntityPredicateSchema } from './createEntityPredicateSchema';

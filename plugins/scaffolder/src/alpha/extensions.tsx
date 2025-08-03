@@ -33,14 +33,28 @@ import { FormFieldBlueprint } from '@backstage/plugin-scaffolder-react/alpha';
 import { scmIntegrationsApiRef } from '@backstage/integration-react';
 import { scaffolderApiRef } from '@backstage/plugin-scaffolder-react';
 import { ScaffolderClient } from '../api';
+import { createEntityPredicateSchema } from '@backstage/plugin-catalog-react/alpha';
 
 export const scaffolderPage = PageBlueprint.makeWithOverrides({
+  config: {
+    schema: {
+      groups: z =>
+        z
+          .array(
+            z.object({
+              title: z.string().optional(),
+              filter: z.union([z.string(), createEntityPredicateSchema(z)]),
+            }),
+          )
+          .optional(),
+    },
+  },
   inputs: {
     formFields: createExtensionInput([
       FormFieldBlueprint.dataRefs.formFieldLoader,
     ]),
   },
-  factory(originalFactory, { inputs }) {
+  factory(originalFactory, { inputs, config }) {
     const formFieldLoaders = inputs.formFields.map(i =>
       i.get(FormFieldBlueprint.dataRefs.formFieldLoader),
     );
@@ -50,7 +64,10 @@ export const scaffolderPage = PageBlueprint.makeWithOverrides({
       loader: () =>
         import('../components/Router/Router').then(m =>
           compatWrapper(
-            <m.InternalRouter formFieldLoaders={formFieldLoaders} />,
+            <m.InternalRouter
+              formFieldLoaders={formFieldLoaders}
+              groups={config.groups}
+            />,
           ),
         ),
     });
