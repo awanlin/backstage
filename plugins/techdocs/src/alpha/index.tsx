@@ -35,6 +35,7 @@ import {
   convertLegacyRouteRefs,
 } from '@backstage/core-compat-api';
 import {
+  createEntityPredicateSchema,
   EntityContentBlueprint,
   EntityIconLinkBlueprint,
 } from '@backstage/plugin-catalog-react/alpha';
@@ -135,14 +136,44 @@ export const techDocsSearchResultListItemExtension =
  *
  * @alpha
  */
-const techDocsPage = PageBlueprint.make({
-  params: {
-    defaultPath: '/docs',
-    routeRef: convertLegacyRouteRef(rootRouteRef),
-    loader: () =>
-      import('../home/components/TechDocsIndexPage').then(m =>
-        compatWrapper(<m.TechDocsIndexPage />),
-      ),
+export const techDocsPage = PageBlueprint.makeWithOverrides({
+  config: {
+    schema: {
+      tabs: z =>
+        z
+          .array(
+            z.object({
+              label: z.string(),
+              panels: z.array(
+                z.object({
+                  title: z.string(),
+                  description: z.string(),
+                  panelType: z.enum([
+                    'DocsCardGrid',
+                    'DocsTable',
+                    'TechDocsIndexPage',
+                    'InfoCardGrid',
+                  ]),
+                  filterPredicate: z.union([
+                    z.string(),
+                    createEntityPredicateSchema(z),
+                  ]),
+                }),
+              ),
+            }),
+          )
+          .optional(),
+    },
+  },
+  factory(originalFactory, { config }) {
+    return originalFactory({
+      routeRef: convertLegacyRouteRef(rootRouteRef),
+      defaultPath: '/docs',
+      loader: () =>
+        import('../home/components/TechDocsCustomHome').then(m =>
+          compatWrapper(<m.TechDocsCustomHome tabsConfig={config.tabs} />),
+        ),
+    });
   },
 });
 

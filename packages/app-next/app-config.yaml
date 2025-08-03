@@ -50,6 +50,30 @@ app:
             # example adding a new group
             - custom:
                 title: Custom
+    - page:scaffolder:
+        config:
+          groups:
+            - title: 'Recommended'
+              filter:
+                metadata.tags:
+                  $in: ['recommended']
+    - page:tech-docs:
+        config:
+          tabs:
+            - label: 'Recommended Documentation'
+              panels:
+                - title: 'Golden Path'
+                  description: 'Documentation about standards to follow'
+                  panelType: 'DocsCardGrid'
+                  filter:
+                    metadata.tags:
+                      $in: ['golden-path']
+                - title: 'Recommended'
+                  description: 'Useful documentation'
+                  panelType: 'InfoCardGrid'
+                  filter:
+                    metadata.tags:
+                      $in: ['golden-path']      
 
     # Entity page cards
     - entity-card:catalog/about:
