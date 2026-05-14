@@ -139,7 +139,11 @@ export default defineMain({
       rollupOptions: {
         ...config.build?.rollupOptions,
         external: [
-          ...((config.build?.rollupOptions?.external as string[]) ?? []),
+          ...(Array.isArray(config.build?.rollupOptions?.external)
+            ? config.build.rollupOptions.external
+            : config.build?.rollupOptions?.external
+            ? [config.build.rollupOptions.external]
+            : []),
           /^node:/,
         ],
       },
