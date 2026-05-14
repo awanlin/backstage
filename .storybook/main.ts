@@ -131,6 +131,20 @@ export default defineMain({
       ],
     };
 
+    // Externalize Node.js built-in modules (node: protocol) so that backend
+    // code pulled in transitively through test utilities doesn't break the
+    // browser bundle — e.g. catalog-backend's use of node:crypto.
+    config.build = {
+      ...config.build,
+      rollupOptions: {
+        ...config.build?.rollupOptions,
+        external: [
+          ...((config.build?.rollupOptions?.external as string[]) ?? []),
+          /^node:/,
+        ],
+      },
+    };
+
     return config;
   },
 });
