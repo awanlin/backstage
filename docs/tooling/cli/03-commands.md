@@ -127,6 +127,21 @@ Options:
   --fix                       Attempt to automatically fix violations
 ```
 
+## repo list-deprecations
+
+Scan all packages in the project for usage of deprecated Backstage APIs and
+report them. This is useful for tracking migration progress when upgrading
+Backstage versions.
+
+```text
+Usage: backstage-cli repo list-deprecations [options]
+
+List deprecations found across all packages in the project
+
+Options:
+  --json        Output as JSON
+```
+
 ## repo test
 
 Test packages in the project. It is recommended to have this command be used as the `test` script in the root `package.json` in your project:
