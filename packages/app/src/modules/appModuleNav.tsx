@@ -107,8 +107,7 @@ export const appModuleNav = createFrontendModule({
               text={item.title}
             />
           ));
-          // Consume without rendering — these are handled by dedicated sidebar groups
-          nav.take('page:home');
+          // Consume without rendering — handled by the search modal
           nav.take('page:search');
           return (
             <Sidebar>
@@ -118,6 +117,7 @@ export const appModuleNav = createFrontendModule({
               </SidebarGroup>
               <SidebarDivider />
               <SidebarGroup label="Menu" icon={<MenuIcon />}>
+                {nav.take('page:home')}
                 {nav.take('page:catalog')}
                 {nav.take('page:scaffolder')}
                 <SidebarDivider />
