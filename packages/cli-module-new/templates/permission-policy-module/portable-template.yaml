@@ -1,4 +1,4 @@
-name: permission-module
+name: permission-policy-module
 role: backend-plugin-module
 description: A backend module that provides a custom permission policy for the permission-backend plugin
 values:
