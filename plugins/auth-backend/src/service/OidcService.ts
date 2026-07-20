@@ -398,6 +398,14 @@ export class OidcService {
     clientId: string;
     redirectUri?: string;
   }) {
+    const builtInCli = getBuiltInCliMetadata(this.baseUrl);
+    if (opts.clientId === builtInCli.clientId) {
+      return this.resolveCimdClient({
+        ...opts,
+        cimdUrl: new URL(opts.clientId),
+      });
+    }
+
     let cimdUrl: URL | undefined;
     try {
       cimdUrl = validateCimdUrl(opts.clientId);

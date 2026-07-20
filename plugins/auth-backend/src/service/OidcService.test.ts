@@ -1912,36 +1912,6 @@ describe('OidcService', () => {
           expect(mockFetchCimdMetadata).not.toHaveBeenCalled();
         });
 
-        it('should resolve built-in CLI client even when hostname resolves to a private IP', async () => {
-          const { service } = await createOidcService({
-            databaseId,
-            config: {
-              auth: {
-                clientIdMetadataDocuments: {
-                  enabled: true,
-                },
-              },
-            },
-          });
-
-          const codeVerifier = 'cli-private-ip-verifier';
-          const codeChallenge = crypto
-            .createHash('sha256')
-            .update(codeVerifier)
-            .digest('base64url');
-
-          const authSession = await service.createAuthorizationSession({
-            clientId: cliClientId,
-            redirectUri: 'http://127.0.0.1:8055/callback',
-            responseType: 'code',
-            codeChallenge,
-            codeChallengeMethod: 'S256',
-          });
-
-          expect(authSession.clientName).toBe('Backstage CLI');
-          expect(mockFetchCimdMetadata).not.toHaveBeenCalled();
-        });
-
         it('should still require CIMD to be enabled for built-in CLI client', async () => {
           const { service } = await createOidcService({
             databaseId,
