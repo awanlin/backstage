@@ -206,6 +206,26 @@ async function readCappedResponseBody(response: Response): Promise<string> {
 }
 
 /**
+ * Returns the built-in CLI client metadata without a network request.
+ *
+ * The Backstage auth backend serves this same metadata at
+ * `/.well-known/oauth-client/cli.json`. When the incoming `client_id`
+ * matches that URL exactly, callers can use this function instead of
+ * fetching over the network — avoiding the SSRF DNS check that would
+ * otherwise reject hostnames resolving to private IPs.
+ */
+export function getBuiltInCliMetadata(baseUrl: string): CimdClientInfo {
+  return {
+    clientId: `${baseUrl}/.well-known/oauth-client/cli.json`,
+    clientName: 'Backstage CLI',
+    redirectUris: ['http://127.0.0.1:8055/callback'],
+    responseTypes: ['code'],
+    grantTypes: ['authorization_code'],
+    scope: 'openid offline_access',
+  };
+}
+
+/**
  * Fetches and validates a CIMD metadata document.
  * @throws InputError if fetching or validation fails
  */

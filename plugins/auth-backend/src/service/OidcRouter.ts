@@ -30,6 +30,7 @@ import { json } from 'express';
 import { z } from 'zod/v4';
 import { fromZodError } from 'zod-validation-error/v4';
 import { OidcError } from './OidcError';
+import { getBuiltInCliMetadata } from './CimdClient';
 
 function ensureTrailingSlash(url: string): string {
   return url.endsWith('/') ? url : `${url}/`;
@@ -230,14 +231,15 @@ export class OidcRouter {
         return;
       }
 
+      const cli = getBuiltInCliMetadata(this.baseUrl);
       res.json({
-        client_id: `${this.baseUrl}/.well-known/oauth-client/cli.json`,
-        client_name: 'Backstage CLI',
-        redirect_uris: ['http://127.0.0.1:8055/callback'],
-        response_types: ['code'],
-        grant_types: ['authorization_code'],
+        client_id: cli.clientId,
+        client_name: cli.clientName,
+        redirect_uris: cli.redirectUris,
+        response_types: cli.responseTypes,
+        grant_types: cli.grantTypes,
         token_endpoint_auth_method: 'none',
-        scope: 'openid offline_access',
+        scope: cli.scope,
       });
     });
 

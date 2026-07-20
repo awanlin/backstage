@@ -1872,6 +1872,146 @@ describe('OidcService', () => {
           });
         });
       });
+
+      describe('built-in CLI client', () => {
+        const cliClientId =
+          'http://mock-base-url/.well-known/oauth-client/cli.json';
+
+        it('should resolve built-in CLI client without calling fetchCimdMetadata', async () => {
+          const { service } = await createOidcService({
+            databaseId,
+            config: {
+              auth: {
+                clientIdMetadataDocuments: {
+                  enabled: true,
+                },
+              },
+            },
+          });
+
+          const codeVerifier = 'cli-test-verifier';
+          const codeChallenge = crypto
+            .createHash('sha256')
+            .update(codeVerifier)
+            .digest('base64url');
+
+          const authSession = await service.createAuthorizationSession({
+            clientId: cliClientId,
+            redirectUri: 'http://127.0.0.1:8055/callback',
+            responseType: 'code',
+            codeChallenge,
+            codeChallengeMethod: 'S256',
+          });
+
+          expect(authSession).toEqual({
+            id: expect.any(String),
+            clientName: 'Backstage CLI',
+            scope: undefined,
+            redirectUri: 'http://127.0.0.1:8055/callback',
+          });
+          expect(mockFetchCimdMetadata).not.toHaveBeenCalled();
+        });
+
+        it('should resolve built-in CLI client even when hostname resolves to a private IP', async () => {
+          const { service } = await createOidcService({
+            databaseId,
+            config: {
+              auth: {
+                clientIdMetadataDocuments: {
+                  enabled: true,
+                },
+              },
+            },
+          });
+
+          const codeVerifier = 'cli-private-ip-verifier';
+          const codeChallenge = crypto
+            .createHash('sha256')
+            .update(codeVerifier)
+            .digest('base64url');
+
+          const authSession = await service.createAuthorizationSession({
+            clientId: cliClientId,
+            redirectUri: 'http://127.0.0.1:8055/callback',
+            responseType: 'code',
+            codeChallenge,
+            codeChallengeMethod: 'S256',
+          });
+
+          expect(authSession.clientName).toBe('Backstage CLI');
+          expect(mockFetchCimdMetadata).not.toHaveBeenCalled();
+        });
+
+        it('should still require CIMD to be enabled for built-in CLI client', async () => {
+          const { service } = await createOidcService({
+            databaseId,
+            config: {
+              auth: {
+                clientIdMetadataDocuments: { enabled: false },
+              },
+            },
+          });
+
+          await expect(
+            service.createAuthorizationSession({
+              clientId: cliClientId,
+              redirectUri: 'http://127.0.0.1:8055/callback',
+              responseType: 'code',
+            }),
+          ).rejects.toThrow('Client ID metadata documents not enabled');
+        });
+
+        it('should still require allowedClientIdPatterns to match for built-in CLI client', async () => {
+          const { service } = await createOidcService({
+            databaseId,
+            config: {
+              auth: {
+                clientIdMetadataDocuments: {
+                  enabled: true,
+                  allowedClientIdPatterns: ['https://other.com/*'],
+                },
+              },
+            },
+          });
+
+          await expect(
+            service.createAuthorizationSession({
+              clientId: cliClientId,
+              redirectUri: 'http://127.0.0.1:8055/callback',
+              responseType: 'code',
+            }),
+          ).rejects.toThrow('Invalid client_id');
+        });
+
+        it('should still validate redirect URI for built-in CLI client', async () => {
+          const { service } = await createOidcService({
+            databaseId,
+            config: {
+              auth: {
+                clientIdMetadataDocuments: {
+                  enabled: true,
+                },
+              },
+            },
+          });
+
+          const codeVerifier = 'cli-redirect-verifier';
+          const codeChallenge = crypto
+            .createHash('sha256')
+            .update(codeVerifier)
+            .digest('base64url');
+
+          await expect(
+            service.createAuthorizationSession({
+              clientId: cliClientId,
+              redirectUri: 'https://evil.com/callback',
+              responseType: 'code',
+              codeChallenge,
+              codeChallengeMethod: 'S256',
+            }),
+          ).rejects.toThrow('Invalid redirect_uri');
+        });
+      });
     });
   });
 });

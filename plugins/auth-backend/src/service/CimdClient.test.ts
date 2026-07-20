@@ -17,7 +17,11 @@
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 import { registerMswTestHooks } from '@backstage/backend-test-utils';
-import { validateCimdUrl, fetchCimdMetadata } from './CimdClient';
+import {
+  validateCimdUrl,
+  fetchCimdMetadata,
+  getBuiltInCliMetadata,
+} from './CimdClient';
 import * as dns from 'node:dns/promises';
 
 jest.mock('dns/promises');
@@ -125,6 +129,24 @@ describe('CimdClient', () => {
 
     it('should throw for invalid URLs', () => {
       expect(() => validateCimdUrl('not-a-url')).toThrow('not a valid URL');
+    });
+  });
+
+  describe('getBuiltInCliMetadata', () => {
+    it('should return CLI metadata with the correct client_id for the given base URL', () => {
+      const metadata = getBuiltInCliMetadata(
+        'https://backstage.example.com/api/auth',
+      );
+
+      expect(metadata).toEqual({
+        clientId:
+          'https://backstage.example.com/api/auth/.well-known/oauth-client/cli.json',
+        clientName: 'Backstage CLI',
+        redirectUris: ['http://127.0.0.1:8055/callback'],
+        responseTypes: ['code'],
+        grantTypes: ['authorization_code'],
+        scope: 'openid offline_access',
+      });
     });
   });
 

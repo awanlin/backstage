@@ -31,7 +31,11 @@ import { OidcDatabase } from '../database/OidcDatabase';
 import { DateTime } from 'luxon';
 import matcher from 'matcher';
 import { OfflineAccessService } from './OfflineAccessService';
-import { validateCimdUrl, fetchCimdMetadata } from './CimdClient';
+import {
+  validateCimdUrl,
+  fetchCimdMetadata,
+  getBuiltInCliMetadata,
+} from './CimdClient';
 
 const WILDCARD_PORT = /:\*(?=\/|$)/;
 const EXPLICIT_PROTOCOL = /^[a-z][a-z0-9+.-]*:/i;
@@ -425,10 +429,14 @@ export class OidcService {
       throw new InputError(`Invalid client_id '${opts.clientId}'`);
     }
 
-    const cimdClient = await fetchCimdMetadata({
-      clientId: opts.clientId,
-      validatedUrl: opts.cimdUrl,
-    });
+    const builtInCli = getBuiltInCliMetadata(this.baseUrl);
+    const cimdClient =
+      opts.clientId === builtInCli.clientId
+        ? builtInCli
+        : await fetchCimdMetadata({
+            clientId: opts.clientId,
+            validatedUrl: opts.cimdUrl,
+          });
 
     if (opts.redirectUri) {
       validateRedirectUri(opts.redirectUri, cimd.allowedRedirectUriPatterns);
