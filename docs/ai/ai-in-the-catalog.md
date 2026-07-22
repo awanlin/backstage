@@ -4,7 +4,7 @@ title: AI in the Software Catalog
 description: How to model AI-related resources in the Backstage Software Catalog, including AiResource entities, MCP server APIs, and their relationships.
 ---
 
-Backstage provides catalog entity types for modeling AI-related resources alongside your other software components. This lets you track ownership, lifecycle, and relationships for AI skills, governance rules, and MCP servers using the same tools you use for the rest of your software catalog.
+Backstage has catalog entity types for modeling AI-related resources alongside your other software components. You can track ownership, lifecycle, and relationships for AI skills, governance rules, and MCP servers the same way you do for the rest of your catalog.
 
 All entities described on this page use the standard [metadata fields](../features/software-catalog/descriptor-format.md#common-to-all-kinds-the-metadata) such as `name`, `description`, `tags`, `annotations`, and `labels`.
 
@@ -30,7 +30,7 @@ The `AiResource` entity kind represents contextual information consumed by AI co
 
 ### Skill
 
-A skill represents reusable contextual knowledge for AI coding tools.
+Skills are reusable contextual knowledge for AI coding tools.
 
 ```yaml
 apiVersion: backstage.io/v1alpha1
@@ -62,7 +62,7 @@ Skill-specific fields:
 
 ### Rule
 
-A rule represents governance rules and constraints for AI coding tools.
+Rules define constraints and governance policies for AI coding tools.
 
 ```yaml
 apiVersion: backstage.io/v1alpha1

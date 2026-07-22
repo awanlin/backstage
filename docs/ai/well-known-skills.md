@@ -1,6 +1,6 @@
 ---
 id: well-known-skills
-title: Well-known Published Skills
+title: Well-known published skills
 description: This section lists the AI skills published by the Backstage project.
 ---
 
